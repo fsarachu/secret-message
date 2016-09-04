@@ -12,20 +12,23 @@ def rename_files():
     # print file_list
 
     # 3. For each file name, delete the numbers from it
+
+    file_count = len(file_list)
     rename_count = 0
 
     for file_name in file_list:
         old_name = file_name
         new_name = file_name.translate(None, "0123456789")
 
-        print "Renaming file \"" + old_name + "\" to \"" + new_name + "\""
-
-        os.rename(old_name, new_name)
-
-        rename_count += 1
+        if old_name == new_name:
+            print "Skipping file \"" + old_name + "\""
+        else:
+            print "Renaming file \"" + old_name + "\" to \"" + new_name + "\""
+            os.rename(old_name, new_name)
+            rename_count += 1
 
     print ""
-    print "Finished: " + rename_count.__str__() + " files renamed"
+    print "Finished: " + rename_count.__str__() + " of " + file_count.__str__() + " files has been renamed"
 
 
 rename_files()
